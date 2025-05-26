@@ -66,9 +66,9 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="timer-display bg-slate-900 rounded-lg p-6 flex flex-col items-center">
           <div className="time-display text-5xl font-bold text-sky-400 mb-2">
-            <span>{hours}</span>:
-            <span>{minutes}</span>:
-            <span>{seconds}</span>
+            <span>{hours.toString().padStart(2, '0')}</span>:
+            <span>{minutes.toString().padStart(2, '0')}</span>:
+            <span>{seconds.toString().padStart(2, '0')}</span>
           </div>
           <div className="timer-label text-slate-400">Today's Session</div>
         </div>
