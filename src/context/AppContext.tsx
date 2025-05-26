@@ -38,8 +38,8 @@ interface AppContextType {
   screenshotsCount: number;
   activityLogs: Array<{ id: string; time: string; description: string }>;
   clearActivityLogs: () => void;
-  activeTab: 'dashboard' | 'analytics' | 'settings';
-  setActiveTab: (tab: 'dashboard' | 'analytics' | 'settings') => void;
+  activeTab: 'dashboard' | 'analytics' | 'settings' | 'screenshots';
+  setActiveTab: (tab: 'dashboard' | 'analytics' | 'settings' | 'screenshots') => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -62,7 +62,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [activityLogs, setActivityLogs] = useState<Array<{ id: string; time: string; description: string }>>([]);
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'analytics' | 'settings'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'analytics' | 'settings' | 'screenshots'>('dashboard');
 
   useEffect(() => {
     // Load screenshots on mount

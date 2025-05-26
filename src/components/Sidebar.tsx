@@ -1,14 +1,11 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
-import { Home, BarChart2, Settings, Clock } from 'lucide-react';
+import { Home, BarChart2, Settings, Clock, Camera } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
   const { activeTab, setActiveTab } = useAppContext();
 
-
-
-  const handleTabChange = (tab: 'dashboard' | 'analytics' | 'settings') => {
-
+  const handleTabChange = (tab: 'dashboard' | 'analytics' | 'settings' | 'screenshots') => {
     setActiveTab(tab);
   };
 
@@ -25,6 +22,12 @@ const Sidebar: React.FC = () => {
           text="Dashboard"
           isActive={activeTab === 'dashboard'}
           onClick={() => handleTabChange('dashboard')}
+        />
+        <NavItem
+          icon={<Camera size={20} />}
+          text="Screenshots"
+          isActive={activeTab === 'screenshots'}
+          onClick={() => handleTabChange('screenshots')}
         />
         <NavItem
           icon={<BarChart2 size={20} />}
