@@ -76,7 +76,10 @@ function createWindow() {
     });
 
     // Load the React app
-    const startUrl = `file://${path.join(__dirname, '../dist/index.html')}`;
+    const startUrl = isDev
+        ? 'http://localhost:5173'
+        : `file://${path.join(__dirname, '../dist/index.html')}`;
+
 
     mainWindow.loadURL(startUrl);
 
