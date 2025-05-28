@@ -21,7 +21,6 @@ const Sidebar: React.FC = () => {
           <Clock size={24} className="text-sky-400 mr-3" />
           {!isCollapsed && <span className="text-xl font-semibold whitespace-nowrap">WorkTracker</span>}
         </div>
-        <div className="flex-1"></div>
         <button
           onClick={() => setIsCollapsed(true)}
           className="text-slate-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-slate-700"

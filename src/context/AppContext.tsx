@@ -57,7 +57,7 @@ export const useAppContext = () => {
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [screenshots, setScreenshots] = useState<Screenshot[]>([]);
   const [isTracking, setIsTracking] = useState(false);
-  const [screenshotInterval, setScreenshotInterval] = useState(60);
+  const [screenshotInterval, setScreenshotInterval] = useState(300);
   const [lastActivity, setLastActivity] = useState('-');
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [hours, setHours] = useState(0);
@@ -95,6 +95,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   }, [today]);
 
   useEffect(() => {
+    // Request notification permission on mount
+    if ('Notification' in window) {
+      if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+        Notification.requestPermission();
+      }
+    }
+
     // Load screenshots on mount
     const loadScreenshots = async () => {
       const loadedScreenshots = await window.electron.getScreenshots();
@@ -109,6 +116,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     window.electron.onScreenshotTaken((data: Screenshot) => {
       setScreenshots(prev => [data, ...prev]);
       setLastActivity(new Date(data.timestamp).toLocaleTimeString());
+      showNotification('Screenshot Taken', `New screenshot captured after ${screenshotInterval / 60}`);
     });
 
     window.electron.onScreenshotError((error: string) => {
@@ -134,7 +142,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
         // Save the current state
         localStorage.setItem('trackingState', JSON.stringify({
-          lastDate: new Date("2025-05-28").toDateString(),
+          lastDate: new Date().toDateString(),
           totalSeconds,
           wasTracking: true,
           checkIn: checkInTime,
@@ -190,8 +198,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
 
     setIsTracking(true);
-    showNotification('Tracking Started', `Screenshots will be taken every minute`);
-    window.electron.startTracking(60);
+    showNotification('Tracking Started', `Screenshots will be taken every ${screenshotInterval / 60} minutes`);
+    window.electron.startTracking(screenshotInterval);
   };
 
   const stopTracking = () => {
@@ -206,7 +214,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setCheckOutTime(new Date().toLocaleTimeString());
 
       localStorage.setItem('trackingState', JSON.stringify({
-        lastDate: new Date("2025-05-28").toDateString(),
+        lastDate: new Date().toDateString(),
         totalSeconds,
         wasTracking: false,
         checkIn: checkInTime,
@@ -220,8 +228,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const showNotification = (title: string, message: string) => {
-    if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification(title, { body: message });
+    if ('Notification' in window) {
+      if (Notification.permission === 'granted') {
+        new Notification(title, {
+          body: message,
+          icon: '/icon.png' // Add an icon if available
+        });
+      } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            new Notification(title, {
+              body: message,
+              icon: '/icon.png' // Add an icon if available
+            });
+          }
+        });
+      }
     }
   };
 

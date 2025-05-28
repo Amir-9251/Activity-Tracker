@@ -41,11 +41,28 @@ const Settings: React.FC = () => {
   };
 
   const handleNotificationToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNotificationsEnabled(e.target.checked);
-    if (e.target.checked) {
-      Notification.requestPermission();
+    const enabled = e.target.checked;
+    setNotificationsEnabled(enabled);
+
+    if (enabled) {
+      if ('Notification' in window) {
+        if (Notification.permission === 'granted') {
+          showNotification('Notification Settings', 'Notifications enabled');
+        } else if (Notification.permission !== 'denied') {
+          Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+              showNotification('Notification Settings', 'Notifications enabled');
+            } else {
+              setNotificationsEnabled(false);
+              showNotification('Notification Settings', 'Please enable notifications in your browser settings');
+            }
+          });
+        } else {
+          setNotificationsEnabled(false);
+          showNotification('Notification Settings', 'Please enable notifications in your browser settings');
+        }
+      }
     }
-    showNotification('Notification Settings', `Notifications ${e.target.checked ? 'enabled' : 'disabled'}`);
   };
 
   return (

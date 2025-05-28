@@ -34,8 +34,16 @@ def take_screenshot(save_path):
         # Use scrot for taking screenshots
         result = subprocess.run(['scrot', save_path], check=True, capture_output=True, text=True)
         
+        # Verify the file was created
         if not os.path.exists(save_path):
             raise Exception(f"Screenshot file was not created at {save_path}")
+        
+        # Verify file size
+        file_size = os.path.getsize(save_path)
+        if file_size == 0:
+            raise Exception(f"Screenshot file is empty at {save_path}")
+            
+        logging.info(f"Screenshot taken successfully: {file_size} bytes")
             
         # Return success response
         response = {

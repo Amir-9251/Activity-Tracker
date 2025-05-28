@@ -127,20 +127,34 @@ function takeScreenshot() {
         try {
             const result = JSON.parse(messages[0]);
             if (result.success) {
+                // Verify the file exists
+                if (!fs.existsSync(result.path)) {
+                    throw new Error('Screenshot file was not created');
+                }
+
                 // Convert absolute path to relative path
                 const relativePath = path.relative(currentDir, result.path);
+
+                // Log the screenshot details
+                console.log('Screenshot saved:', {
+                    path: relativePath,
+                    timestamp: result.timestamp
+                });
 
                 mainWindow.webContents.send('screenshot-taken', {
                     path: relativePath,
                     timestamp: result.timestamp
                 });
             } else {
+                console.error('Screenshot failed:', result.error);
                 mainWindow.webContents.send('screenshot-error', result.error);
             }
         } catch (error) {
+            console.error('Screenshot error:', error.message);
             mainWindow.webContents.send('screenshot-error', error.message);
         }
     }).catch(error => {
+        console.error('Screenshot error:', error.message);
         mainWindow.webContents.send('screenshot-error', error.message);
     });
 }
