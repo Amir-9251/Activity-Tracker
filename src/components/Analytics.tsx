@@ -3,7 +3,7 @@ import { useAppContext } from '../context/AppContext';
 import { Clock, Timer, Sun, Moon, TrendingUp, LogIn, LogOut, Calendar, Activity } from 'lucide-react';
 
 const Analytics: React.FC = () => {
-  const { screenshots } = useAppContext();
+  const { screenshots, checkInTime, checkOutTime } = useAppContext();
 
   // Calculate total tracking time based on actual intervals
   const calculateTotalTime = () => {
@@ -85,29 +85,23 @@ const Analytics: React.FC = () => {
   };
 
   // Get check-in and check-out times
-  const getSessionTimes = () => {
-    if (screenshots.length === 0) return { checkIn: 'No data', checkOut: 'No data' };
+  // const getSessionTimes = () => {
+  //   const savedState = localStorage.getItem('trackingState');
+  //   if (!savedState) return { checkIn: checkInTime, checkOut: checkOutTime };
 
-    const sortedScreenshots = [...screenshots].sort((a, b) =>
-      new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-    );
+  //   const formatTime = (date: Date) => {
+  //     return date.toLocaleString(undefined, {
+  //       hour: '2-digit',
+  //       minute: '2-digit',
+  //       hour12: true
+  //     });
+  //   };
 
-    const checkIn = new Date(sortedScreenshots[0].timestamp);
-    const checkOut = new Date(sortedScreenshots[sortedScreenshots.length - 1].timestamp);
-
-    const formatTime = (date: Date) => {
-      return date.toLocaleString(undefined, {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true
-      });
-    };
-
-    return {
-      checkIn: formatTime(checkIn),
-      checkOut: formatTime(checkOut)
-    };
-  };
+  //   return {
+  //     checkIn: formatTime(checkInTime),
+  //     checkOut: formatTime(checkOutTime)
+  //   };
+  // };
 
   // Calculate daily statistics
   const calculateDailyStats = () => {
@@ -126,7 +120,7 @@ const Analytics: React.FC = () => {
   };
 
   const timeDistribution = calculateTimeDistribution();
-  const sessionTimes = getSessionTimes();
+  const sessionTimes = { checkIn: checkInTime ? checkInTime : "No data", checkOut: checkOutTime ? checkOutTime : "No data" };
   const dailyStats = calculateDailyStats();
 
   return (

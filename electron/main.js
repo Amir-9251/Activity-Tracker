@@ -49,8 +49,9 @@ app.on('certificate-error', (event, webContents, url, error, certificate, callba
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 1200,
-        height: 800,
+        width: 800,
+        height: 600,
+        resizable: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.mjs'),
             contextIsolation: true,
@@ -75,16 +76,14 @@ function createWindow() {
     });
 
     // Load the React app
-    const startUrl = isDev
-        ? 'http://localhost:5173'
-        : `file://${path.join(__dirname, '../dist/index.html')}`;
+    const startUrl = `file://${path.join(__dirname, '../dist/index.html')}`;
 
     mainWindow.loadURL(startUrl);
 
     // Open DevTools in development mode
-    if (isDev) {
-        mainWindow.webContents.openDevTools();
-    }
+    // if (isDev) {
+    //     mainWindow.webContents.openDevTools();
+    // }
 
     // Handle window state
     mainWindow.on('closed', () => {
