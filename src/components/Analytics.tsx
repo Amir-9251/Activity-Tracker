@@ -126,42 +126,42 @@ const Analytics: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Session Overview */}
-      <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6">
-        <h3 className="text-xl font-semibold mb-4">Session Overview</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <LogIn className="w-6 h-6 text-green-400" />
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-700/30 backdrop-blur-sm">
+        <h3 className="text-3xl font-bold bg-gradient-to-r from-sky-400 via-emerald-400 to-sky-400 bg-clip-text text-transparent mb-6">Session Overview</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <LogIn className="w-6 h-6 text-sky-400" />
               <div>
-                <p className="text-sm text-gray-400">Check-in Time</p>
-                <p className="text-xl font-semibold">{sessionTimes.checkIn}</p>
+                <p className="text-sm text-slate-400 font-medium">Check-in Time</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{sessionTimes.checkIn}</p>
               </div>
             </div>
           </div>
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <LogOut className="w-6 h-6 text-red-400" />
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <LogOut className="w-6 h-6 text-emerald-400" />
               <div>
-                <p className="text-sm text-gray-400">Check-out Time</p>
-                <p className="text-xl font-semibold">{sessionTimes.checkOut}</p>
+                <p className="text-sm text-slate-400 font-medium">Check-out Time</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{sessionTimes.checkOut}</p>
               </div>
             </div>
           </div>
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <Timer className="w-6 h-6 text-blue-400" />
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <Timer className="w-6 h-6 text-sky-400" />
               <div>
-                <p className="text-sm text-gray-400">Total Duration</p>
-                <p className="text-xl font-semibold">{calculateTotalTime()}</p>
+                <p className="text-sm text-slate-400 font-medium">Total Duration</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{calculateTotalTime()}</p>
               </div>
             </div>
           </div>
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <Clock className="w-6 h-6 text-green-400" />
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <Clock className="w-6 h-6 text-emerald-400" />
               <div>
-                <p className="text-sm text-gray-400">Active Time</p>
-                <p className="text-xl font-semibold">{calculateActiveTime()}</p>
+                <p className="text-sm text-slate-400 font-medium">Active Time</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{calculateActiveTime()}</p>
               </div>
             </div>
           </div>
@@ -169,24 +169,24 @@ const Analytics: React.FC = () => {
       </div>
 
       {/* Daily Activity */}
-      <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6">
-        <h3 className="text-xl font-semibold mb-4">Daily Activity</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <Calendar className="w-6 h-6 text-purple-400" />
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-700/30 backdrop-blur-sm">
+        <h3 className="text-3xl font-bold bg-gradient-to-r from-sky-400 via-emerald-400 to-sky-400 bg-clip-text text-transparent mb-6">Daily Activity</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <Calendar className="w-6 h-6 text-sky-400" />
               <div>
-                <p className="text-sm text-gray-400">Today's Date</p>
-                <p className="text-xl font-semibold">{dailyStats.date}</p>
+                <p className="text-sm text-slate-400 font-medium">Today's Date</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{dailyStats.date}</p>
               </div>
             </div>
           </div>
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <Activity className="w-6 h-6 text-blue-400" />
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <Activity className="w-6 h-6 text-emerald-400" />
               <div>
-                <p className="text-sm text-gray-400">Today's Screenshots</p>
-                <p className="text-xl font-semibold">{dailyStats.count}</p>
+                <p className="text-sm text-slate-400 font-medium">Today's Screenshots</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{dailyStats.count}</p>
               </div>
             </div>
           </div>
@@ -194,42 +194,42 @@ const Analytics: React.FC = () => {
       </div>
 
       {/* Time Distribution */}
-      <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6">
-        <h3 className="text-xl font-semibold mb-4">Time Distribution</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <Sun className="w-6 h-6 text-orange-400" />
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-700/30 backdrop-blur-sm">
+        <h3 className="text-3xl font-bold bg-gradient-to-r from-sky-400 via-emerald-400 to-sky-400 bg-clip-text text-transparent mb-6">Time Distribution</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <Sun className="w-6 h-6 text-sky-400" />
               <div>
-                <p className="text-sm text-gray-400">Morning Activity</p>
-                <p className="text-xl font-semibold">{timeDistribution.morning} sessions</p>
+                <p className="text-sm text-slate-400 font-medium">Morning Activity</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{timeDistribution.morning} sessions</p>
               </div>
             </div>
           </div>
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <TrendingUp className="w-6 h-6 text-yellow-400" />
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <TrendingUp className="w-6 h-6 text-emerald-400" />
               <div>
-                <p className="text-sm text-gray-400">Afternoon Activity</p>
-                <p className="text-xl font-semibold">{timeDistribution.afternoon} sessions</p>
+                <p className="text-sm text-slate-400 font-medium">Afternoon Activity</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{timeDistribution.afternoon} sessions</p>
               </div>
             </div>
           </div>
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <Moon className="w-6 h-6 text-indigo-400" />
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <Moon className="w-6 h-6 text-sky-400" />
               <div>
-                <p className="text-sm text-gray-400">Evening Activity</p>
-                <p className="text-xl font-semibold">{timeDistribution.evening} sessions</p>
+                <p className="text-sm text-slate-400 font-medium">Evening Activity</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{timeDistribution.evening} sessions</p>
               </div>
             </div>
           </div>
-          <div className="bg-white/5 rounded-lg p-4">
-            <div className="flex items-center space-x-3">
-              <Clock className="w-6 h-6 text-gray-400" />
+          <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+            <div className="flex items-center space-x-4">
+              <Clock className="w-6 h-6 text-emerald-400" />
               <div>
-                <p className="text-sm text-gray-400">Night Activity</p>
-                <p className="text-xl font-semibold">{timeDistribution.night} sessions</p>
+                <p className="text-sm text-slate-400 font-medium">Night Activity</p>
+                <p className="text-xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{timeDistribution.night} sessions</p>
               </div>
             </div>
           </div>
