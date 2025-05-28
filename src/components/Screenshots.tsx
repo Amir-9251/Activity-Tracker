@@ -15,10 +15,10 @@ const Screenshots: React.FC = () => {
     const getScreenshotPath = (relativePath: string) => {
         // In development, use the relative path directly
         if (process.env.NODE_ENV === 'development') {
-            return relativePath;
+            return `/${relativePath}`;
         }
         // In production, use the app's protocol
-        return `file://${relativePath}`;
+        return `app://${relativePath}`;
     };
 
     return (

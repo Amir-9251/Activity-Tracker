@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog, session } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, session, protocol } from 'electron';
 import path from 'path';
 import fs from 'fs';
 import moment from 'moment';
@@ -9,6 +9,15 @@ import electronReloader from 'electron-reloader';
 const isDev = process.env.NODE_ENV === 'development';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Register custom protocol for handling local files
+app.whenReady().then(() => {
+    protocol.registerFileProtocol('app', (request, callback) => {
+        const url = request.url.substr(6);
+        const filePath = path.join(__dirname, '..', url);
+        callback({ path: filePath });
+    });
+});
 
 // Enable hot reloading in development
 if (isDev) {
@@ -84,9 +93,9 @@ function createWindow() {
     mainWindow.loadURL(startUrl);
 
     // Open DevTools in development mode
-    // if (isDev) {
-    //     mainWindow.webContents.openDevTools();
-    // }
+    if (isDev) {
+        mainWindow.webContents.openDevTools();
+    }
 
     // Handle window state
     mainWindow.on('closed', () => {

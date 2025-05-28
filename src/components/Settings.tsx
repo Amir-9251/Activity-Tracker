@@ -50,10 +50,10 @@ const Settings: React.FC = () => {
 
   return (
     <div className="settings-content space-y-6">
-      <div className="settings-card bg-slate-800 rounded-xl p-6 shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">General Settings</h2>
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-700/30 backdrop-blur-sm">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-sky-400 via-emerald-400 to-sky-400 bg-clip-text text-transparent mb-6">General Settings</h2>
 
-        <div className="settings-grid space-y-4">
+        <div className="settings-grid space-y-6">
           <SettingItem
             icon={<Clock size={20} className="text-sky-400" />}
             label="Screenshot Interval"
@@ -67,14 +67,14 @@ const Settings: React.FC = () => {
                 min="300"
                 max="3600"
                 step="300"
-                className="w-20 px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
+                className="w-20 px-3 py-2 rounded-xl bg-slate-800/50 border border-slate-700/30 text-white focus:outline-none focus:ring-2 focus:ring-sky-500"
               />
               <span className="input-suffix ml-2 text-slate-400">minutes</span>
             </div>
           </SettingItem>
 
           <SettingItem
-            icon={<Bell size={20} className="text-amber-400" />}
+            icon={<Bell size={20} className="text-emerald-400" />}
             label="Screenshot Notifications"
           >
             <ToggleSwitch
@@ -85,7 +85,7 @@ const Settings: React.FC = () => {
           </SettingItem>
 
           <SettingItem
-            icon={<Power size={20} className="text-emerald-400" />}
+            icon={<Power size={20} className="text-sky-400" />}
             label="Launch on Startup"
           >
             <ToggleSwitch
@@ -97,29 +97,29 @@ const Settings: React.FC = () => {
         </div>
       </div>
 
-      <div className="settings-card bg-slate-800 rounded-xl p-6 shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">Data Management</h2>
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-700/30 backdrop-blur-sm">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-sky-400 via-emerald-400 to-sky-400 bg-clip-text text-transparent mb-6">Data Management</h2>
 
-        <div className="settings-grid space-y-4">
+        <div className="settings-grid space-y-6">
           <SettingItem
-            icon={<Trash2 size={20} className="text-red-400" />}
+            icon={<Trash2 size={20} className="text-emerald-400" />}
             label="Clear All Data"
           >
             <button
               onClick={handleClearData}
-              className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
+              className="px-6 py-2.5 bg-gradient-to-r from-sky-400 to-emerald-400 text-white rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-sky-500/20"
             >
               Clear Data
             </button>
           </SettingItem>
 
           <SettingItem
-            icon={<Download size={20} className="text-blue-400" />}
+            icon={<Download size={20} className="text-sky-400" />}
             label="Export Data"
           >
             <button
               onClick={handleExportData}
-              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+              className="px-6 py-2.5 bg-gradient-to-r from-sky-400 to-emerald-400 text-white rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-sky-500/20"
             >
               Export
             </button>
@@ -137,10 +137,10 @@ interface SettingItemProps {
 }
 
 const SettingItem: React.FC<SettingItemProps> = ({ icon, label, children }) => (
-  <div className="setting-item flex items-center justify-between">
-    <div className="flex items-center space-x-3">
+  <div className="setting-item flex items-center justify-between bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
+    <div className="flex items-center space-x-4">
       {icon}
-      <span className="text-slate-300">{label}</span>
+      <span className="text-slate-300 font-medium">{label}</span>
     </div>
     {children}
   </div>
@@ -157,11 +157,11 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ id, checked, onChange }) =>
     <input
       type="checkbox"
       id={id}
+      className="sr-only peer"
       checked={checked}
       onChange={onChange}
-      className="sr-only peer"
     />
-    <div className="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+    <div className="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-sky-400 peer-checked:to-emerald-400"></div>
   </label>
 );
 
