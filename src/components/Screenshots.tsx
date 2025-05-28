@@ -15,17 +15,17 @@ const Screenshots: React.FC = () => {
     const getScreenshotPath = (relativePath: string) => {
         // In development, use the relative path directly
         if (process.env.NODE_ENV === 'development') {
-            return relativePath;
+            return `/${relativePath}`;
         }
         // In production, use the app's protocol
-        return `file://${relativePath}`;
+        return `app://${relativePath}`;
     };
 
     return (
         <div className="space-y-6">
-            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-700/30 backdrop-blur-sm">
-                <h2 className="text-3xl font-bold bg-gradient-to-r from-sky-400 via-emerald-400 to-sky-400 bg-clip-text text-transparent mb-6">Statistics</h2>
-                <div className="stats-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="stats-card bg-slate-800 rounded-xl p-6 shadow-lg">
+                <h2 className="text-xl font-semibold mb-4">Statistics</h2>
+                <div className="stats-grid grid grid-cols-1 gap-4">
                     <StatCard
                         icon={<Camera size={20} className="text-sky-400" />}
                         value={screenshotsCount.toString()}
@@ -39,35 +39,56 @@ const Screenshots: React.FC = () => {
                 </div>
             </div>
 
-            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-700/30 backdrop-blur-sm">
-                <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-3xl font-bold bg-gradient-to-r from-sky-400 via-emerald-400 to-sky-400 bg-clip-text text-transparent">Screenshots</h2>
+            <div className="activity-card bg-slate-800 rounded-xl p-6 shadow-lg">
+                <div className="card-header flex justify-between items-center mb-4">
+                    <h2 className="text-xl font-semibold">Activity Log</h2>
                     <button
+                        className="btn-icon p-2 rounded-full bg-slate-700 hover:bg-slate-600 transition-colors"
                         onClick={clearActivityLogs}
-                        className="px-6 py-2.5 bg-gradient-to-r from-sky-400 to-emerald-400 text-white rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-sky-500/20 flex items-center gap-2"
                     >
                         <Trash2 size={18} />
-                        <span>Clear All</span>
                     </button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {screenshots.map((screenshot, index) => (
-                        <div key={index} className="bg-slate-800/50 rounded-2xl p-4 border border-slate-700/30">
+
+                <div className="activity-log max-h-64 overflow-y-auto pr-2">
+                    {activityLogs.map((log) => (
+                        <div key={log.id} className="activity-item py-2 border-b border-slate-700 last:border-none">
+                            <div className="activity-time text-sm text-emerald-400">{log.time}</div>
+                            <div className="activity-description mt-1">{log.description}</div>
+                        </div>
+                    ))}
+
+                    {activityLogs.length === 0 && (
+                        <div className="py-4 text-center text-slate-500">
+                            No activity recorded yet
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <div className="screenshots-card bg-slate-800 rounded-xl p-6 shadow-lg">
+                <h2 className="text-xl font-semibold mb-4">Recent Screenshots</h2>
+                <div className="screenshots-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {screenshots.slice(-8).map((screenshot, index) => (
+                        <div
+                            key={index}
+                            className="screenshot-item relative"
+                        >
                             <img
                                 src={getScreenshotPath(screenshot.path)}
                                 alt={`Screenshot ${index + 1}`}
-                                className="w-full h-48 object-cover rounded-xl mb-3"
+                                className="w-full h-32 object-cover rounded-lg"
                             />
-                            <div className="flex items-center justify-between">
-                                <span className="text-slate-400 text-sm">
-                                    {new Date(screenshot.timestamp).toLocaleTimeString()}
-                                </span>
-                                <span className="text-slate-400 text-sm">
-                                    {new Date(screenshot.timestamp).toLocaleDateString()}
-                                </span>
+                            <div className="screenshot-time absolute bottom-2 left-2 text-xs bg-black bg-opacity-50 px-2 py-1 rounded">
+                                {new Date(screenshot.timestamp).toLocaleTimeString()}
                             </div>
                         </div>
                     ))}
+                    {screenshots.length === 0 && (
+                        <div className="col-span-full py-4 text-center text-slate-500">
+                            No screenshots captured yet
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
@@ -81,12 +102,12 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ icon, value, label }) => (
-    <div className="stat-card bg-slate-800/50 rounded-2xl p-6 border border-slate-700/30">
-        <div className="flex items-center space-x-4">
+    <div className="stat-card bg-slate-900 rounded-lg p-4">
+        <div className="flex items-center space-x-3">
             {icon}
             <div>
-                <div className="text-2xl font-semibold bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">{value}</div>
-                <div className="text-sm text-slate-400 font-medium">{label}</div>
+                <div className="text-2xl font-semibold">{value}</div>
+                <div className="text-sm text-slate-400">{label}</div>
             </div>
         </div>
     </div>
